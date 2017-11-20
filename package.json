@@ -1,0 +1,15 @@
+{
+  "name": "polarized-discordbot",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "PolarizedIons",
+    "email": "polarizedions@gmail.com"
+  },
+  "private": true,
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "uws": "^8.14.1"
+  }
+}
