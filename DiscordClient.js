@@ -5,10 +5,12 @@ const path = require('path');
 const Discord = require('discord.js');
 
 const config = require('./config');
+const Utils = require('./Utils');
 
 class DiscordClient extends EventEmitter {
     constructor() {
         super();
+        this.startTime = new Date();
         this.logger = require('winston');
         
         this.eventListeners = {};
@@ -18,7 +20,7 @@ class DiscordClient extends EventEmitter {
         this.client.on("warn", w => this.logger.warn("[Discord.js]", w));
         this.client.on("error", e => this.logger.error("[Discord.js]", e));
         
-        setInterval(() => this.client.user.setGame('Ping: ' + floor(this.client.ping) + 'ms'), 30 * 1000);  // Update ping every 60 seconds
+        setInterval(() => this.client.user.setGame('Ping: ' + Math.floor(this.client.ping) + 'ms'), 30 * 1000);  // Update ping every 60 seconds
 
         this._registerEventListeners();
     }
@@ -54,6 +56,10 @@ class DiscordClient extends EventEmitter {
 
 
         this.client.on("message", event => this.emit("message", event));
+    }
+
+    get uptime() {
+        return Utils.floorToDecimalSpaces(((new Date()) - this.startTime) / 1000);
     }
 }
 
