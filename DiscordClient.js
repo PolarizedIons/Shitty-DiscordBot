@@ -20,9 +20,15 @@ class DiscordClient extends EventEmitter {
         this.client.on("warn", w => this.logger.warn("[Discord.js]", w));
         this.client.on("error", e => this.logger.error("[Discord.js]", e));
         
-        setInterval(() => this.client.user.setGame('Ping: ' + Math.floor(this.client.ping) + 'ms'), 30 * 1000);  // Update ping every 30 seconds
+        setInterval(this.setGameToPing.bind(this), 30 * 1000); // Update ping every 30 seconds
 
         this._registerEventListeners();
+    }
+
+    setGameToPing() {
+        if (this.client.user) {
+            this.client.user.setGame('Ping: ' + Math.floor(this.client.ping) + 'ms');
+        }
     }
 
     login() {
