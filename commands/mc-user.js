@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const logger = require('winston');
 
 const MinecraftAPI = require('../MinecraftAPI');
 const Utils = require('../Utils');
@@ -27,7 +28,11 @@ module.exports = {
                 embed.addField("UUID", profile.id);
                 embed.addField("Legacy", profile.legacy ? "Yes" : "No");
                 embed.addField("Demo", profile.demo ? "Yes" : "No");
-                message.channel.send(embed);
+                return message.channel.send(embed);
+            })
+            .catch((err) => {
+                logger.error("Error getting profile for mcuser " + args[0], err);
+                return Utils.replyToUser(message, "An error occured, please try again later");
             });
     },
 }
