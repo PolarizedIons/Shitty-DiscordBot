@@ -32,12 +32,15 @@ function parseMotd(motd) {
     }
     else {
         // JSON format
-        // let message = "";
+        let message = motd.text;
         
-        // TODO
+        if (motd.extra) {
+            motd.extra.forEach((motdExtra) => {
+                message += parseMotd(motdExtra);
+            })
+        }
 
-
-        return motd.text;
+        return message;
     }
 }
 
