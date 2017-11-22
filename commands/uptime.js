@@ -12,7 +12,7 @@ module.exports = {
         let embed = new Discord.RichEmbed();
         embed.addField("Bot Uptime", client.uptime + 's');
         embed.addField("Connection Uptime", connectionUptime + 's');
-        embed.addField("Ping", client.client.ping + 'ms');
+        embed.addField("Ping", Utils.floorToDecimalSpaces(client.client.ping, 1) + 'ms');
 
         message.channel.send(embed);
     },
