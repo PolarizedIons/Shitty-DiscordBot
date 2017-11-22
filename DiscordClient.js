@@ -61,7 +61,11 @@ class DiscordClient extends EventEmitter {
         });
 
 
-        this.client.on("message", event => this.emit("message", event));
+        this.client.on("message", message => {
+            if (message.author !== this.client.user) {
+                this.emit("message", message);
+            }
+        });
     }
 
     get uptime() {
