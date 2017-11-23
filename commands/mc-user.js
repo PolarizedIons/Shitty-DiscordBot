@@ -7,6 +7,7 @@ const Utils = require('../Utils');
 module.exports = {
     commands: ['mcuser'],
     help: "Give info about a minecraft username",
+    usage: "<username>",
     exec(client, command, message) {
         let args = message.content.split(" ").slice(1);
         if (args.length < 1) {

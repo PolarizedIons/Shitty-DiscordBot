@@ -5,6 +5,7 @@ const Utils = require('../Utils');
 module.exports = {
     commands: ['uptime'],
     help: "Show the uptime of the bot",
+    usage: "",
     exec(client, command, message) {
         // message.channel.send('<@' + message.author.id + '> Bot Uptime: ' + client.uptime + 's, Connection Uptime: ' + Math.floor(client.client.uptime / 1000) + 's');
         let connectionUptime = Utils.floorToDecimalSpaces(client.client.uptime / 1000);

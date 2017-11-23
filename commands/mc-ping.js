@@ -6,6 +6,7 @@ const Utils = require('../Utils');
 module.exports = {
     commands: ['mcping'],
     help: "Ping a minecraft server",
+    usage: "<host>[:port]",
     exec(client, command, message) {
         let args = message.content.split(" ").slice(1);
 

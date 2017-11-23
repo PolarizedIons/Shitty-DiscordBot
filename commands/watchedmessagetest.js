@@ -5,6 +5,7 @@ const WatchedMessage = require('../WatchedMessage');
 module.exports = {
     commands: ['watchtest'],
     help: "test the watched message thingy",
+    usage: "",
     exec(client, command, message) {
         message.channel.send("I'm watching this message for reactions")
             .then(message => {

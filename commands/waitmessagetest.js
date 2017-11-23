@@ -6,6 +6,7 @@ const Utils = require('../Utils');
 module.exports = {
     commands: ['replytest'],
     help: "test the reply message thingy",
+    usage: "",
     exec(client, command, commandMessage) {
         commandMessage.channel.send("I'm waiting for a reply from <@" + commandMessage.author.id + ">")
             .then(message => {
