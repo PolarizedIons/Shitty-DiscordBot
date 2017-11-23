@@ -26,6 +26,10 @@ module.exports = {
                 embed.addField("MOTD", serverData.motd);
                 embed.addField("Players", `${serverData.players.online}/${serverData.players.slots}`);
 
+                if (serverData.players.sample.length > 0) {
+                    embed.addField("Online Players Sample", serverData.players.sample.join(", "));
+                }
+
                 message.channel.send(embed);
             })
             .catch(() => {
