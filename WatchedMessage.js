@@ -10,24 +10,24 @@ let client;
 
 function notifyMessage(event, eventArgs, message) {
     messages.forEach(watchedMessage => {
-        if (message === watchedMessage.message) {
+        if (message.id === watchedMessage.message.id) {
             watchedMessage.emit(event, ...eventArgs);
         }
     });
 }
 
-function initListener() {
+function initListeners() {
     client.on("messageDelete", message => {
         notifyMessage("messageDelete", [message], message);
     });
 
     client.on("messageReactionAdd", (reaction, user) => {
-        if (user === client.user) { return; }
+        if (user.id === client.user.id) { return; }
         notifyMessage("messageReactionAdd", [reaction, user], reaction.message);
     });
 
     client.on("messageReactionRemove", (reaction, user) => {
-        if (user === client.user) { return; }
+        if (user.id === client.user.id) { return; }
         notifyMessage("messageReactionRemove", [reaction, user], reaction.message);
     });
 
@@ -45,15 +45,16 @@ class WatchedMessage extends EventEmitter {
         super();
         messages.push(this);
         this.message = message;
-        logger.debug("Watching message " + message.id + " by " + message.author);
+        logger.debug("Watching message " + message.id + " by " + message.author.username);
 
         if (client === undefined) {
             client = message.client;
-            initListener();
+            initListeners();
         }
     }
 
     stopWatching() {
+        logger.debug("Stopped watching message " + this.message.id + " by " + this.message.author.username);
         Utils.removeFromArray(messages, this);
     }
 }
