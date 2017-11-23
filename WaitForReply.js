@@ -6,7 +6,8 @@ let waitingFor = [];
 function initListener() {
     client.on("message", (message) => {
         waitingFor.forEach(({resolve, user, channel}) => {
-            if (message.channel === channel && message.author === user) {
+            console.log("message", message.channel.id, channel.id, message.author.username, user.username)
+            if (message.channel.id === channel.id && message.author.id === user.id) {
                 Utils.removeFromArray(waitingFor, {resolve, user, channel});
                 resolve(message);
             }
