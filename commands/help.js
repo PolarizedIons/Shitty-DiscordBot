@@ -25,9 +25,15 @@ function sendCommandInfo(user, commandObj, commandArg) {
 
 function sendAllCommands(user) {
     let commands = Commands.getCommands();
+    let commandTexts = [];
+
+    commandTexts.push(" **=== Start of commands for this bot ===** ");
     for (let command of commands) {
-        user.send(`**${Config.commandPrefix}${command.commands[0]}** ${command.usage} - *${command.help}*`);
+        commandTexts.push(`**${Config.commandPrefix}${command.commands[0]}** ${command.usage} - *${command.help}*`);
     }
+    commandTexts.push(" **=== End of commands for this bot ===** ");
+
+    Utils.stringLengthSpliiter(commandTexts.join("\n"), 2000).forEach(msgText => user.send(msgText));
 }
 
 module.exports = {
@@ -50,9 +56,7 @@ module.exports = {
         }
         else {
             // All commands
-            message.author.send(" **=== Start of commands for this bot ===** ");
             sendAllCommands(message.author);
-            message.author.send(" **=== End of commands for this bot ===** ");
         }
     },
 }
