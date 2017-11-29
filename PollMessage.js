@@ -78,7 +78,7 @@ class PollMessage extends EventEmitter {
                             let percent = Math.round(voteCount / totalVotes * 100);
                             percent = isNaN(percent) ? 0 : percent;
                             let progessBar = Utils.progressBarString(percent, 16, "█", "");
-                            resultText += `${progessBar} ${percent}% - ${option}\n\n`;
+                            resultText += `${progessBar} ${percent}% - ${option}\n`;
                         }
 
                         for (let resultMsg of Utils.stringLengthSpliiter(resultText, 2000)) {
