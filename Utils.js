@@ -2,8 +2,12 @@ function floorToDecimalSpaces(value, decimalSpaces = 2) {
     return Math.floor(value * 10** decimalSpaces) / 10 ** decimalSpaces;
 }
 
+function mentionString(user) {
+    return `<@${user.id}>`;
+}
+
 function replyToUser(messageObject, reply) {
-    messageObject.channel.send('<@' + messageObject.author.id + '> ' + reply);
+    messageObject.channel.send(mentionString(messageObject.author) + ' ' + reply);
 }
 
 function removeFromArray(array, value) {
@@ -34,9 +38,21 @@ function stringLengthSpliiter(str, maxLength, splitChar) {
     return resultStrs;
 }
 
+function progressBarString(percent, maxLength, fillCharacter, remainCharacter) {
+    fillCharacter = fillCharacter === undefined ? "=" : fillCharacter;
+    remainCharacter = remainCharacter === undefined ? " " : remainCharacter;
+
+    let complete = Math.round(percent/100.0 * maxLength);
+    let remaining = maxLength - complete;
+
+    return Array(Math.max(0, complete)).fill(fillCharacter).join("") + Array(Math.max(0, remaining)).fill(remainCharacter).join("");
+}
+
 module.exports = {
     floorToDecimalSpaces,
+    mentionString,
     replyToUser,
     removeFromArray,
     stringLengthSpliiter,
+    progressBarString,
 };
