@@ -13,9 +13,8 @@ function sendCommandInfo(user, commandObj, commandArg) {
     embed.addField("Command", Config.commandPrefix + commandArg);
     embed.addField("Description", commandObj.help);
     
-    let aliases = commandObj.commands.filter(c => c !== commandArg);
-    if (aliases.length > 1) {
-        embed.addField("Aliases", aliases,join(", "));
+    if (commandObj.commands.length > 1) {
+        embed.addField("Aliases", commandObj.commands.join(", "));
     }
 
     embed.addField("Usage", Config.commandPrefix + commandArg + " " + commandObj.usage);
