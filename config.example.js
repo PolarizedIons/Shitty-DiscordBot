@@ -3,4 +3,5 @@ module.exports = {
         "loginToken": "",
     },
     "commandPrefix": "!",
+    "openWeatherApi": ""
 };
