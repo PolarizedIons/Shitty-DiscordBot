@@ -71,6 +71,10 @@ class DiscordClient extends EventEmitter {
     get uptime() {
         return Utils.floorToDecimalSpaces(((new Date()) - this.startTime) / 1000);
     }
+
+    get user() {
+        return this.client.user;
+    }
 }
 
 module.exports = DiscordClient;
